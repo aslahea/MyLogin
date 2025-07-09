@@ -1,0 +1,81 @@
+
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #181c27;
+    }
+    .landing-container {
+        background: #23273a;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        padding: 48px 32px;
+        margin: 40px auto;
+        max-width: 900px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+    }
+    .landing-content {
+        max-width: 420px;
+    }
+    .landing-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        color: #fff;
+    }
+    .landing-desc {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        color: #bfc6d1;
+    }
+    .landing-btns .btn {
+        margin-right: 16px;
+        min-width: 120px;
+        font-weight: 500;
+    }
+    .landing-btns .btn:last-child {
+        margin-right: 0;
+    }
+    .landing-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .landing-image img {
+        max-width: 340px;
+        width: 100%;
+        filter: drop-shadow(0 0 24px #0008);
+    }
+    @media (max-width: 900px) {
+        .landing-container {
+            flex-direction: column;
+            text-align: center;
+            padding: 32px 10px;
+        }
+        .landing-image {
+            margin-top: 32px;
+        }
+    }
+</style>
+<div class="landing-container">
+    <div class="landing-content">
+        <div class="landing-title">Your landing page title goes here.</div>
+        <div class="landing-desc">Lorem ipsum dolor sit amet, conse ctetuer adipis cing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
+        <div class="landing-btns mb-4">
+            <a href="#" class="btn btn-primary" style="background:#8f6ed5;border:none;">LEARN MORE</a>
+            <a href="#" class="btn btn-secondary" style="background:#232b3e;border:none;">DOWNLOAD</a>
+        </div>
+        <form action="{% url 'signout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger mt-2">Sign Out</button>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+venv/
+registers/
+myapp/app/__pycache__/
+myapp/myapp/__pycache__/
+myapp/app/migrations/__pycache__/
