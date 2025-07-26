@@ -1,8 +1,10 @@
 
 {% extends 'base.html' %}
+{% block h1 %}Welcome{% endblock %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
 <style>
     body {
         background: #181c27;
@@ -63,6 +65,7 @@
         }
     }
 </style>
+
 <div class="landing-container">
     <div class="landing-content">
         <div class="landing-title">Your landing page title goes here.</div>
@@ -71,6 +74,7 @@
             <a href="#" class="btn btn-primary" style="background:#8f6ed5;border:none;">LEARN MORE</a>
             <a href="#" class="btn btn-secondary" style="background:#232b3e;border:none;">DOWNLOAD</a>
         </div>
+        
         <form action="{% url 'signout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger mt-2">Sign Out</button>

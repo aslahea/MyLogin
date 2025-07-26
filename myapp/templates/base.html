@@ -18,7 +18,7 @@
         <div class="w-100" style="max-width: 400px; min-height: 370px;">
             <div class="bg-white rounded-4 shadow p-4">
                 <header class="mb-4 text-center">
-                    <h1 class="display-5 fw-bold">Welcome</h1>
+                    <h1 class="display-5 fw-bold">{% block h1 %}{% endblock %}</h1>
                 </header>
                 {% block content %}
                 {% endblock %}

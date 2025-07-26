@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+from django.views.decorators.cache import never_cache
 
 # Predefined credentials
 PREDEFINED_USERNAME = 'Aslah'
 PREDEFINED_PASSWORD = '12345'
 
+@never_cache
 def login(request):
+    if request.session.get('user'):
+        return redirect('home')
+    response = None
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -15,34 +20,26 @@ def login(request):
             return redirect('home')
         else:
             messages.error(request, 'Incorrect username or password.')
-            return render(request, 'login.html')
+            response = render(request, 'login.html')
     else:
-        return render(request, 'login.html')
+        response = render(request, 'login.html')
+    if response:
+        return response
+    
 
+@never_cache
 def home(request):
     if not request.session.get('user'):
-        # Prevent caching so back button doesn't show home after signout
-        response = redirect('login')
-        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-        response['Pragma'] = 'no-cache'
-        response['Expires'] = '0'
-        return response
+        return redirect('login')
     response = render(request, 'index.html')
-    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response['Pragma'] = 'no-cache'
-    response['Expires'] = '0'
     return response
 
+@never_cache
 def signout(request):
     try:
         del request.session['user']
     except KeyError:
         pass
-    response = redirect('login')
-    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response['Pragma'] = 'no-cache'
-    response['Expires'] = '0'
-    return response
-
+    return redirect('login')
 def register(request):
     return render(request,'register.html')
